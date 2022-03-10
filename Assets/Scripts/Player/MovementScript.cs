@@ -17,7 +17,9 @@ public class MovementScript : MonoBehaviour
     public float rotationSpeed;
     public float rollForce;
     private Animator animPerso;
-    private bool canMove = true;
+    public bool canMove = true;
+    public AnimationCurve curve;
+    public GameObject weapon;
 
     
     [SerializeField] float acceleration = 10f;
@@ -54,6 +56,7 @@ public class MovementScript : MonoBehaviour
         ControlSpeed();
         jumpLogic();
         Roll();
+        Slash();
     }
     private void SetDir()
     {
@@ -79,17 +82,12 @@ public class MovementScript : MonoBehaviour
             //rb.AddForce(movDir.normalized * walkSpeed * movementMultiplier, ForceMode.Acceleration);
             rb.velocity = new Vector3(movDir.x * walkSpeed, 0, movDir.z * walkSpeed);
         }
-       
-        
-
         if(movDir != Vector3.zero)
             transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, target, Time.deltaTime * 5.0f);
-
     }
 
     void jumpLogic()
-    {
-        
+    {        
         if (isGrounded && Input.GetButtonDown("Fire1"))
         {
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
@@ -97,19 +95,37 @@ public class MovementScript : MonoBehaviour
         }
     }
 
+    private float currentTime = 0;
+    private float delayToMove = 1;
+
     void Roll()
     {
         if (Input.GetButtonDown("Jump"))
         {             
             animPerso.Play("Roll");
-            transform.Translate(transform.GetChild(0).forward * rollForce * Time.deltaTime, Space.World);
-            
-            
+            currentTime = 0;
+        }
+
+        currentTime += Time.deltaTime;
+        float percent = currentTime / delayToMove;
+
+        if (!canMove)
+        {            
+            //curve.Evaluate(percent)
+            transform.position = Vector3.Lerp(transform.GetChild(0).position, transform.GetChild(0).position + transform.GetChild(0).forward * rollForce, curve.Evaluate(percent));
         }
     }
 
-    
-    void CanMove()
+    void Slash()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            animPerso.Play("Slash1");
+        }
+    }
+       
+
+    public void CanMove()
     {
         if (canMove)
         {
