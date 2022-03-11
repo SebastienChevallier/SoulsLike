@@ -82,8 +82,8 @@ public class MovementScript : MonoBehaviour
             //rb.AddForce(movDir.normalized * walkSpeed * movementMultiplier, ForceMode.Acceleration);
             rb.velocity = new Vector3(movDir.x * walkSpeed, 0, movDir.z * walkSpeed);
         }
-        if(movDir != Vector3.zero)
-            transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, target, Time.deltaTime * 5.0f);
+        if(movDir != Vector3.zero && canMove)
+            transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, target, Time.deltaTime * rotationSpeed);
     }
 
     void jumpLogic()
@@ -100,7 +100,7 @@ public class MovementScript : MonoBehaviour
 
     void Roll()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && canMove)
         {             
             animPerso.Play("Roll");
             currentTime = 0;
