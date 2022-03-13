@@ -92,6 +92,7 @@ public class MovementScript : MonoBehaviour
         {
             rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             isGrounded = false;
+            animPerso.Play("Jump");
         }
     }
 
