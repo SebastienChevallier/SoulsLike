@@ -18,9 +18,12 @@ public class MovementScript : MonoBehaviour
     public float rollForce;
     private Animator animPerso;
     public bool canMove = true;
+    public bool isInvincible = false;
+    public bool canRotate = true;
     public AnimationCurve curve;
     public GameObject weapon;
 
+    public List<GameObject> weapons;
     public string weaponType;
 
     
@@ -43,10 +46,20 @@ public class MovementScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animPerso = transform.GetChild(0).GetComponent<Animator>();
+        CheckWeapon();
     }
 
     private void FixedUpdate()
     {
+        if(animPerso.GetCurrentAnimatorStateInfo(0).IsName("Slash1") || animPerso.GetCurrentAnimatorStateInfo(0).IsName("Slash2") || animPerso.GetCurrentAnimatorStateInfo(0).IsName("Slash3"))
+        {
+            rotationSpeed = 2;
+        }
+        else
+        {
+            rotationSpeed = 25;
+        }
+
         Move();
         rb.velocity += new Vector3(0, Physics.gravity.y * tauxGrav * Time.deltaTime, 0);
     }
@@ -69,7 +82,7 @@ public class MovementScript : MonoBehaviour
         
         animPerso.SetFloat("Blend", movDir.magnitude);
 
-        if (movDir != Vector3.zero && canMove)
+        if (movDir != Vector3.zero && canRotate)
         {
             target = Quaternion.LookRotation(new Vector3(movDir.x * 60.0f, 0f, movDir.z * 60.0f));
         }
@@ -88,7 +101,7 @@ public class MovementScript : MonoBehaviour
             //rb.AddForce(movDir.normalized * walkSpeed * movementMultiplier, ForceMode.Acceleration);
             rb.velocity = new Vector3(movDir.x * walkSpeed, 0, movDir.z * walkSpeed);
         }
-        if(movDir != Vector3.zero && canMove)
+        if(movDir != Vector3.zero && canRotate)
         {
             transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, target, Time.deltaTime * rotationSpeed);
         }
@@ -126,24 +139,81 @@ public class MovementScript : MonoBehaviour
         }
     }
 
+    private float delayTime = 1.5f;
+    private int compteurCombo = 0;
     void Slash()
-    {
-        if (Input.GetButtonDown("Fire2"))
+    {    
+        if (Input.GetButtonDown("Fire2") && canMove)
         {
-            animPerso.Play("Slash1");
+            if (delayTime < Time.time)
+            {
+                compteurCombo = 0;
+            }
+            
+            
+            delayTime = Time.time + 1.5f;
+            compteurCombo++;
+
+            if(compteurCombo == 1)
+            {
+                animPerso.Play("Slash1");
+            }else if(compteurCombo == 2)
+            {
+                animPerso.Play("Slash2");
+            }
+            else
+            {
+                animPerso.Play("Slash3");
+                compteurCombo = 0;
+            }
+            Debug.Log(delayTime);
+            Debug.Log(Time.unscaledTime);
+
         }
     }
        
 
     public void CanMove()
     {
-        if (canMove)
+        canMove = true;        
+    }
+    public void CantMove()
+    {       
+        canMove = false;      
+    }
+
+    public void CantRotate()
+    {
+        canRotate = false;
+        
+    }
+    public void CanRotate()
+    {
+        canRotate = true;
+    }
+
+    public void Invincible()
+    {
+        isInvincible = true;
+    }
+    public void vincible()
+    {
+        isInvincible = false;
+    }
+
+    void CheckWeapon()
+    {
+        foreach(GameObject obj in weapons)
         {
-            canMove = false;
-        }
-        else
-        {
-            canMove = true;
+            if (obj.CompareTag(weaponType))
+            {
+                obj.SetActive(true);
+                obj.GetComponent<Weapon>().ChangeAnimator();
+            }
+            else
+            {
+                obj.SetActive(false);
+            }
         }
     }
 

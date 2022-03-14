@@ -16,4 +16,26 @@ public class AnimEvents : MonoBehaviour
         player.CanMove();
     }
 
+    void CantMove()
+    {
+        player.CantMove();
+    }
+
+    public void CantRotate()
+    {
+        player.CantRotate();
+    }
+    public void CanRotate()
+    {
+        player.CanRotate();
+    }
+
+    public void Invincible()
+    {
+        player.Invincible();
+    }
+    public void vincible()
+    {
+        player.vincible();
+    }
 }
