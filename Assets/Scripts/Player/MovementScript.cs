@@ -21,6 +21,8 @@ public class MovementScript : MonoBehaviour
     public AnimationCurve curve;
     public GameObject weapon;
 
+    public string weaponType;
+
     
     [SerializeField] float acceleration = 10f;
     public float tauxGrav = 0.1f;
@@ -66,8 +68,12 @@ public class MovementScript : MonoBehaviour
         movDir = mouveX + mouveY;
         
         animPerso.SetFloat("Blend", movDir.magnitude);
+
+        if (movDir != Vector3.zero && canMove)
+        {
+            target = Quaternion.LookRotation(new Vector3(movDir.x * 60.0f, 0f, movDir.z * 60.0f));
+        }
         
-        target = Quaternion.LookRotation(new Vector3(movDir.x * 60.0f, 0f, movDir.z * 60.0f));
     }
 
     void ControlSpeed()
@@ -83,7 +89,10 @@ public class MovementScript : MonoBehaviour
             rb.velocity = new Vector3(movDir.x * walkSpeed, 0, movDir.z * walkSpeed);
         }
         if(movDir != Vector3.zero && canMove)
+        {
             transform.GetChild(0).rotation = Quaternion.Slerp(transform.GetChild(0).rotation, target, Time.deltaTime * rotationSpeed);
+        }
+            
     }
 
     void jumpLogic()
