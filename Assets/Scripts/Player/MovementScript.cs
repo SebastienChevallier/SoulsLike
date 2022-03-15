@@ -139,7 +139,7 @@ public class MovementScript : MonoBehaviour
         }
     }
 
-    private float delayTime = 1.5f;
+    private float delayTime = 2f;
     private int compteurCombo = 0;
     void Slash()
     {    
@@ -151,7 +151,7 @@ public class MovementScript : MonoBehaviour
             }
             
             
-            delayTime = Time.time + 1.5f;
+            delayTime = Time.time + 2f;
             compteurCombo++;
 
             if(compteurCombo == 1)
@@ -166,8 +166,8 @@ public class MovementScript : MonoBehaviour
                 animPerso.Play("Slash3");
                 compteurCombo = 0;
             }
-            Debug.Log(delayTime);
-            Debug.Log(Time.unscaledTime);
+            Debug.Log(compteurCombo);
+            
 
         }
     }
