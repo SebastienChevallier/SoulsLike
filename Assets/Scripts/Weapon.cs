@@ -13,20 +13,16 @@ public class Weapon : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _player = GameObject.Find("Player");
         
-    }
-    private void OnEnable()
-    {
-        ChangeAnimator();
-    }
+    }    
 
     private void OnTriggerEnter(Collider other)
     {
         
-        if (!_player.GetComponent<MovementScript>().canMove)
+        if (!_player.GetComponent<MovementScript>().canAttack)
         {
             if (other.CompareTag("Mob"))
             {
@@ -39,11 +35,7 @@ public class Weapon : MonoBehaviour
 
     public void ChangeAnimator()
     {
-        if(_player.GetComponent<MovementScript>().weaponType == tag)
-        {
-            
-            _player.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = animatorController;
-        }       
+        _player.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = animatorController;         
         
     }
 }

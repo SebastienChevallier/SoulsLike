@@ -30,6 +30,7 @@ public class MovementScript : MonoBehaviour
     [Header("Roll Settings")]
     public AnimationCurve curve;
     public float rollForce;
+    public float delayToMove = 1;
 
     [Header("Special Settings")]
     public AnimationCurve dashCurve;
@@ -49,14 +50,16 @@ public class MovementScript : MonoBehaviour
     private float delayTime = 2f;
     private int compteurCombo = 0;
     private float currentTime = 0;
-    private float delayToMove = 1;
-    private float activeGrav;
+      
     private Quaternion target;
 
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animPerso = transform.GetChild(0).GetComponent<Animator>();
+    }
+    void Start()
+    {       
         CheckWeapon();
     }
 
@@ -78,7 +81,8 @@ public class MovementScript : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = Physics.Raycast(transform.position, -transform.up, 0.1f);
+        isGrounded = Physics.Raycast(transform.position, -transform.up, 0.3f);
+        animPerso.SetBool("isGrounded", isGrounded);
         SetDir();
         ControlSpeed();
         jumpLogic();
@@ -88,7 +92,7 @@ public class MovementScript : MonoBehaviour
     }
     private void SetDir()
     {
-        activeGrav = 9.8f;
+        
         Vector3 mouveY = mainCamera.forward * Input.GetAxis("Vertical");
         Vector3 mouveX = mainCamera.right * Input.GetAxis("Horizontal");        
         movDir = mouveX + mouveY;
@@ -125,7 +129,7 @@ public class MovementScript : MonoBehaviour
     {        
         if (isGrounded && Input.GetButtonDown("Fire1"))
         {
-            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(rb.velocity.x, jumpForce, rb.velocity.z), ForceMode.Impulse);
             isGrounded = false;
             animPerso.Play("Jump");
         }
@@ -147,16 +151,16 @@ public class MovementScript : MonoBehaviour
         float percent = currentTime / delayToMove;
 
         if (isRoll)
-        {            
-            //curve.Evaluate(percent)
-            transform.position = Vector3.Lerp(transform.GetChild(0).position, transform.GetChild(0).position + transform.GetChild(0).forward * rollForce, curve.Evaluate(percent));
+        {
+            rb.AddForce((transform.GetChild(0).forward * rollForce) * curve.Evaluate(percent), ForceMode.Force);
+            //transform.position = Vector3.Lerp(transform.GetChild(0).position, transform.GetChild(0).position + transform.GetChild(0).forward * rollForce, curve.Evaluate(percent));
         }
     }
 
     
     void Slash()
     {    
-        if (Input.GetButtonDown("Fire2") && canAttack)
+        if (Input.GetButtonDown("Fire2") && canAttack && !isRoll)
         {
             if (delayTime < Time.time)
             {
@@ -264,5 +268,8 @@ public class MovementScript : MonoBehaviour
             }
         }
     }
+
+
+
 
 }
