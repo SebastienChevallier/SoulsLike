@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dummy
   m_EditorClassIdentifier: 
   _name: Dummy
-  maxLife: 500
-  life: -1200
+  maxLife: 900000
+  life: 900000

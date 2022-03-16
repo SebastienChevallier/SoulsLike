@@ -21,5 +21,10 @@ public class Dummy : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
 
 }

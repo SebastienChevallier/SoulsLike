@@ -6,8 +6,8 @@ public class JoystickCamera : MonoBehaviour
 {
     [SerializeField]
     float sensitivityX = 8f;
+
     [SerializeField]
-    float sensitivityY = 0.5f;
     float xRotation = 0f;
 
 
@@ -15,15 +15,20 @@ public class JoystickCamera : MonoBehaviour
     [SerializeField] float xClamp = 85f;
     [SerializeField] float minXClamp = 0f;
 
-    private Transform lockCible;
+    public Transform lockCible;
     public LayerMask mask;
+    public float camDistance;
+    public LayerMask maskCam;
+    public float lerpTime = 5f;
+    public AnimationCurve curve;
 
-    private bool islocked;
+    public bool islocked;
 
 
     private void FixedUpdate()
     {
         CameraRotation();
+        CameraColision();
         
 
     }
@@ -43,27 +48,39 @@ public class JoystickCamera : MonoBehaviour
             Vector3 targetRotation = transform.eulerAngles;
             targetRotation.x = xRotation;
             targetRotation.z = 0;
-            playerCamera.eulerAngles = targetRotation;
+            transform.eulerAngles = targetRotation;
         }
     }
 
     void CameraLock()
     {
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Lock"))
         {
-            RaycastHit hit;  
-
-            // Cast a sphere wrapping character controller 10 meters forward
-            // to see if it is about to hit anything.
-            if (Physics.SphereCast(transform.position, 100, transform.forward, out hit, 50, mask))
+            if (islocked)
             {
-                lockCible = hit.transform;
+                islocked = false;
+            }
+            else
+            {
                 islocked = true;
             }
-        }else if (islocked)
-        {
-            transform.LookAt(lockCible);
+        }else if(islocked)
+        {           
+            transform.LookAt(lockCible.position);
         }
         
+    }
+
+    void CameraColision()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, -transform.forward, out hit, camDistance, maskCam))
+        {            
+            playerCamera.position = Vector3.Lerp(playerCamera.position, hit.point + playerCamera.forward * 0.1f, curve.Evaluate( Time.deltaTime * lerpTime));
+        }
+        else
+        {
+            playerCamera.localPosition = new Vector3(0f, 0, -6f);
+        }
     }
 }

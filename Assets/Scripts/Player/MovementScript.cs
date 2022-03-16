@@ -41,12 +41,11 @@ public class MovementScript : MonoBehaviour
     public string weaponType;
 
     [Header("Other Settings")]
-    private Animator animPerso;
-    public float tauxGrav = 0.1f;
-    Rigidbody rb;
+    public float tauxGrav = 0.1f;    
     public Transform mainCamera;
     public Vector3 movDir;
-
+    Rigidbody rb;
+    private Animator animPerso;    
     private float delayTime = 2f;
     private int compteurCombo = 0;
     private float currentTime = 0;

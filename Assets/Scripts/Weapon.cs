@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
     public int damage;
     private GameObject _player;
+    public GameObject fx_Blood;
     
     public RuntimeAnimatorController animatorController;
     
@@ -29,14 +30,20 @@ public class Weapon : MonoBehaviour
         {
             if (other.CompareTag("Mob"))
             {
+                Debug.Log("touch");
                 other.GetComponent<Dummy>().so_Dummy.TakeDamage(damage);
+                Instantiate(fx_Blood, other.ClosestPoint(transform.position), Quaternion.identity);
             }
         }
     }
 
     public void ChangeAnimator()
     {
-        _player.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = animatorController;
-        Debug.Log(animatorController.name);
+        if(_player.GetComponent<MovementScript>().weaponType == tag)
+        {
+            
+            _player.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = animatorController;
+        }       
+        
     }
 }

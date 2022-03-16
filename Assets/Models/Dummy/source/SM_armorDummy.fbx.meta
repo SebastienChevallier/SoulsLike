@@ -3,7 +3,12 @@ guid: e59e5fb6d35ab1e45865325bccda5017
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: busto
+    second: {fileID: 2100000, guid: 941fbdac86b323946a19e068a2bf763a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
