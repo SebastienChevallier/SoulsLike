@@ -38,4 +38,23 @@ public class AnimEvents : MonoBehaviour
     {
         player.vincible();
     }
+
+    public void CantAttack()
+    {
+        player.CantAttack();
+    }
+    public void CanAttack()
+    {
+        player.CanAttack();
+    }
+
+    public void IsRoll()
+    {
+        player.IsRoll();
+    }
+
+    public void IsntRoll()
+    {
+        player.IsntRoll();
+    }
 }

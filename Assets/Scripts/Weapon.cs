@@ -37,5 +37,6 @@ public class Weapon : MonoBehaviour
     public void ChangeAnimator()
     {
         _player.transform.GetChild(0).GetComponent<Animator>().runtimeAnimatorController = animatorController;
+        Debug.Log(animatorController.name);
     }
 }

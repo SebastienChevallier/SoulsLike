@@ -66,15 +66,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8924275
-        functionName: CanMove
+      - time: 0
+        functionName: CantRotate
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0
-        functionName: CantRotate
+        functionName: Invincible
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -94,8 +94,22 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.8924275
+        functionName: CanMove
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0
-        functionName: Invincible
+        functionName: IsRoll
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.75303984
+        functionName: IsntRoll
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

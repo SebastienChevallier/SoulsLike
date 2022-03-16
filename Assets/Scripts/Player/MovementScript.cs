@@ -8,38 +8,50 @@ public class MovementScript : MonoBehaviour
     public float walkSpeed;
     public float jumpForce;
     public float moveMultiply;
+    [SerializeField] float acceleration = 10f;
 
+    [Header("Character Settings")]
     public int Base_PV = 100;
     public int Actual_PV = 100;
-
     public int Base_Stamina = 100;
     public int Actual_Stamina = 100;
+
+    [Header("Rotation Settings")]
     public float rotationSpeed;
-    public float rollForce;
-    private Animator animPerso;
+
+    [Header("Booleans")]
     public bool canMove = true;
     public bool isInvincible = false;
     public bool canRotate = true;
-    public AnimationCurve curve;
-    public GameObject weapon;
+    public bool isRoll = false;
+    public bool isGrounded = false;
+    public bool canAttack;
 
+    [Header("Roll Settings")]
+    public AnimationCurve curve;
+    public float rollForce;
+
+    [Header("Special Settings")]
+    public AnimationCurve dashCurve;
+    public float dashForce;
+
+    [Header("Weapons")]
+    public GameObject weapon;
     public List<GameObject> weapons;
     public string weaponType;
 
-    
-    [SerializeField] float acceleration = 10f;
+    [Header("Other Settings")]
+    private Animator animPerso;
     public float tauxGrav = 0.1f;
-
-
-
-
-    //other Variables
     Rigidbody rb;
     public Transform mainCamera;
-    public bool isGrounded = false;
     public Vector3 movDir;
-    private float activeGrav;
 
+    private float delayTime = 2f;
+    private int compteurCombo = 0;
+    private float currentTime = 0;
+    private float delayToMove = 1;
+    private float activeGrav;
     private Quaternion target;
 
     void Start()
@@ -51,9 +63,10 @@ public class MovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(animPerso.GetCurrentAnimatorStateInfo(0).IsName("Slash1") || animPerso.GetCurrentAnimatorStateInfo(0).IsName("Slash2") || animPerso.GetCurrentAnimatorStateInfo(0).IsName("Slash3"))
+        CheckWeapon();
+        if (!canMove)
         {
-            rotationSpeed = 2;
+            rotationSpeed = 0.5f;
         }
         else
         {
@@ -72,6 +85,7 @@ public class MovementScript : MonoBehaviour
         jumpLogic();
         Roll();
         Slash();
+        Special();
     }
     private void SetDir()
     {
@@ -118,13 +132,14 @@ public class MovementScript : MonoBehaviour
         }
     }
 
-    private float currentTime = 0;
-    private float delayToMove = 1;
+    
 
     void Roll()
     {
+       
         if (Input.GetButtonDown("Jump") && canMove)
-        {             
+        {
+            isRoll = true;
             animPerso.Play("Roll");
             currentTime = 0;
         }
@@ -132,18 +147,17 @@ public class MovementScript : MonoBehaviour
         currentTime += Time.deltaTime;
         float percent = currentTime / delayToMove;
 
-        if (!canMove)
+        if (isRoll)
         {            
             //curve.Evaluate(percent)
             transform.position = Vector3.Lerp(transform.GetChild(0).position, transform.GetChild(0).position + transform.GetChild(0).forward * rollForce, curve.Evaluate(percent));
         }
     }
 
-    private float delayTime = 2f;
-    private int compteurCombo = 0;
+    
     void Slash()
     {    
-        if (Input.GetButtonDown("Fire2") && canMove)
+        if (Input.GetButtonDown("Fire2") && canAttack)
         {
             if (delayTime < Time.time)
             {
@@ -166,13 +180,29 @@ public class MovementScript : MonoBehaviour
                 animPerso.Play("Slash3");
                 compteurCombo = 0;
             }
-            Debug.Log(compteurCombo);
+            
             
 
         }
     }
        
+    void Special()
+    {
+        if(Input.GetButtonDown("Fire3") && canAttack)
+        {
+            animPerso.Play("Special");
+            currentTime = 0;
+        }
+        /*
+        currentTime += Time.deltaTime;
+        float percent = currentTime / 1f;
 
+        if (!canMove)
+        {
+            //curve.Evaluate(percent)
+            transform.position = Vector3.Lerp(transform.GetChild(0).position, transform.GetChild(0).position + transform.GetChild(0).forward * dashForce, dashCurve.Evaluate(percent));
+        }*/
+    }
     public void CanMove()
     {
         canMove = true;        
@@ -199,6 +229,25 @@ public class MovementScript : MonoBehaviour
     public void vincible()
     {
         isInvincible = false;
+    }
+
+    
+    public void CanAttack()
+    {
+        canAttack = true;
+    }
+    public void CantAttack()
+    {
+        canAttack = false;
+    }
+
+    public void IsRoll()
+    {
+        isRoll = true;
+    }
+    public void IsntRoll()
+    {
+        isRoll = false;
     }
 
     void CheckWeapon()
