@@ -11,10 +11,11 @@ public class MovementScript : MonoBehaviour
     [SerializeField] float acceleration = 10f;
 
     [Header("Character Settings")]
-    public int Base_PV = 100;
-    public int Actual_PV = 100;
-    public int Base_Stamina = 100;
-    public int Actual_Stamina = 100;
+    public SO_Player playerStats;
+    public int costSlash;
+    public int costJump;
+    public int costRoll;
+    public int costSpecial;
 
     [Header("Rotation Settings")]
     public float rotationSpeed;
@@ -50,7 +51,10 @@ public class MovementScript : MonoBehaviour
     private float delayTime = 2f;
     private int compteurCombo = 0;
     private float currentTime = 0;
-      
+    private float coolDownStart = 0f;
+    private float regenCooldown = 0.1f; // 2 = two seconds 
+
+
     private Quaternion target;
 
     private void Awake()
@@ -74,6 +78,7 @@ public class MovementScript : MonoBehaviour
         {
             rotationSpeed = 25;
         }
+        RegenStamina();
 
         Move();
         rb.velocity += new Vector3(0, Physics.gravity.y * tauxGrav * Time.deltaTime, 0);
@@ -81,7 +86,7 @@ public class MovementScript : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = Physics.Raycast(transform.position, -transform.up, 0.3f);
+        isGrounded = Physics.Raycast(transform.position, -transform.up, 0.15f);
         animPerso.SetBool("isGrounded", isGrounded);
         SetDir();
         ControlSpeed();
@@ -127,24 +132,25 @@ public class MovementScript : MonoBehaviour
 
     void jumpLogic()
     {        
-        if (isGrounded && Input.GetButtonDown("Fire1"))
+        if (isGrounded && Input.GetButtonDown("Fire1") && playerStats.stamina > costJump)
         {
+            playerStats.UseStamina(costJump);
             rb.AddForce(new Vector3(rb.velocity.x, jumpForce, rb.velocity.z), ForceMode.Impulse);
             isGrounded = false;
             animPerso.Play("Jump");
+            weapon.GetComponent<Weapon>().compteurCoup = 1;
         }
-    }
-
-    
+    }     
 
     void Roll()
-    {
-       
-        if (Input.GetButtonDown("Jump") && canMove)
+    {       
+        if (Input.GetButtonDown("Jump") && canMove && !isRoll && playerStats.stamina > costRoll)
         {
+            playerStats.UseStamina(costRoll);
             isRoll = true;
             animPerso.Play("Roll");
             currentTime = 0;
+            weapon.GetComponent<Weapon>().compteurCoup = 1;
         }
 
         currentTime += Time.deltaTime;
@@ -155,19 +161,30 @@ public class MovementScript : MonoBehaviour
             rb.AddForce((transform.GetChild(0).forward * rollForce) * curve.Evaluate(percent), ForceMode.Force);
             //transform.position = Vector3.Lerp(transform.GetChild(0).position, transform.GetChild(0).position + transform.GetChild(0).forward * rollForce, curve.Evaluate(percent));
         }
-    }
+    }    
+        
 
+    void RegenStamina()
+    {
+        if (Time.time > coolDownStart + regenCooldown && canMove && !isRoll && canAttack)
+        {
+            playerStats.GainStamina();
+            coolDownStart = Time.time;
+        }
+    }
     
     void Slash()
-    {    
-        if (Input.GetButtonDown("Fire2") && canAttack && !isRoll)
+    {       
+
+        if (Input.GetButtonDown("Fire2") && canAttack && !isRoll && canMove && playerStats.stamina > costSlash)
         {
+            playerStats.UseStamina(costSlash);
+
             if (delayTime < Time.time)
             {
                 compteurCombo = 0;
             }
-            
-            
+
             delayTime = Time.time + 2f;
             compteurCombo++;
 
@@ -182,17 +199,15 @@ public class MovementScript : MonoBehaviour
             {
                 animPerso.Play("Slash3");
                 compteurCombo = 0;
-            }
-            
-            
-
+            }      
         }
     }
        
     void Special()
     {
-        if(Input.GetButtonDown("Fire3") && canAttack)
+        if(Input.GetButtonDown("Fire3") && canAttack && !isRoll && canMove && playerStats.stamina > costSpecial)
         {
+            playerStats.UseStamina(costSpecial);
             animPerso.Play("Special");
             currentTime = 0;
         }
@@ -206,6 +221,8 @@ public class MovementScript : MonoBehaviour
             transform.position = Vector3.Lerp(transform.GetChild(0).position, transform.GetChild(0).position + transform.GetChild(0).forward * dashForce, dashCurve.Evaluate(percent));
         }*/
     }
+
+    #region accesseurs
     public void CanMove()
     {
         canMove = true;        
@@ -237,7 +254,8 @@ public class MovementScript : MonoBehaviour
     
     public void CanAttack()
     {
-        canAttack = true;
+        canAttack = true;                      
+        weapon.GetComponent<Weapon>().compteurCoup = 0;        
     }
     public void CantAttack()
     {
@@ -252,6 +270,7 @@ public class MovementScript : MonoBehaviour
     {
         isRoll = false;
     }
+    #endregion
 
     void CheckWeapon()
     {
@@ -261,6 +280,7 @@ public class MovementScript : MonoBehaviour
             {
                 obj.SetActive(true);
                 obj.GetComponent<Weapon>().ChangeAnimator();
+                weapon = obj;
             }
             else
             {

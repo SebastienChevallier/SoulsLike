@@ -11,9 +11,11 @@ public class SO_Ennemis : ScriptableObject
     public int life;
 
 
-    public int TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
-        life -= damage;
-        return life;
+        if (life > damage)
+        {
+            life -= damage;
+        }
     }
 }
