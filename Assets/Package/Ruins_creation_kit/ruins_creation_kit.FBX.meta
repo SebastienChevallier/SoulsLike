@@ -1,0 +1,278 @@
+fileFormatVersion: 2
+guid: 71ff0e77341aa304c921a48a639924b6
+ModelImporter:
+  serializedVersion: 21100
+  internalIDToNameTable:
+  - first:
+      43: 4300000
+    second: nef_01
+  - first:
+      43: 4300002
+    second: pillars_01
+  - first:
+      43: 4300004
+    second: entrance_01
+  - first:
+      43: 4300006
+    second: pillar_01
+  - first:
+      43: 4300008
+    second: pillar_broke_01
+  - first:
+      43: 4300010
+    second: pillar_broke_part_01
+  - first:
+      43: 4300012
+    second: dome_01
+  - first:
+      43: 4300014
+    second: destroyed_wall_01
+  - first:
+      43: 4300016
+    second: destroyed_wall_02
+  - first:
+      43: 4300018
+    second: tomb_01
+  - first:
+      43: 4300020
+    second: vitrail_01
+  - first:
+      43: 4300022
+    second: vitrail_02
+  - first:
+      43: 4300024
+    second: vitrail_03
+  - first:
+      43: 4300026
+    second: vitrail_04
+  - first:
+      43: 4300028
+    second: vitrail_05
+  - first:
+      43: 4300030
+    second: vitrail_06
+  - first:
+      43: 4300032
+    second: vitrail_07
+  - first:
+      43: 4300034
+    second: destroyed_floor_01
+  - first:
+      43: 4300036
+    second: entrance_02
+  - first:
+      43: 4300038
+    second: pillar_02
+  - first:
+      43: 4300040
+    second: entrance_03
+  - first:
+      43: 4300042
+    second: iron_gate_01
+  - first:
+      43: 4300044
+    second: Object01
+  - first:
+      43: 4300046
+    second: corridor_01
+  - first:
+      43: 4300048
+    second: pew_01
+  - first:
+      43: 4300050
+    second: pew_02
+  - first:
+      1001: 100100000
+    second: DataTemplate __Singleton__
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 01_ground
+    second: {fileID: 2100000, guid: e2001d6aea12b3943a9958ac55ce3b2f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: domeInside
+    second: {fileID: 2100000, guid: 5af9b0818627e5b41b704ce3d3980264, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: domeOutside
+    second: {fileID: 2100000, guid: b1e0cf06a23ebdc43bd1c9d7a337ed00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: iron
+    second: {fileID: 2100000, guid: 27895cd1f23eec440a624e458d571efd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: messBrick
+    second: {fileID: 2100000, guid: 03464585cb7a1fa408ed4185ce94f8a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal
+    second: {fileID: 2100000, guid: b0907ba6f51930a4b85382874b4722c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: old_wood
+    second: {fileID: 2100000, guid: cf71dec3adee3374480933dd0e3ace8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pew_01
+    second: {fileID: 2100000, guid: 672fd79b392c29947aa96cb77fcf5512, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tomb_01
+    second: {fileID: 2100000, guid: 94b1efcfdd55fd644878171ae7e124a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitrail_01
+    second: {fileID: 2100000, guid: 1d68f23a93ce6534797a7a1030025018, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitrail_02
+    second: {fileID: 2100000, guid: 7a02ca10d70c01e4dba6bc28cceba6bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitrail_03
+    second: {fileID: 2100000, guid: 770f26b0dce43494a9cb9744b729dc1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: vitrail_04
+    second: {fileID: 2100000, guid: 24f0203774216534a8c498443c631735, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: walls
+    second: {fileID: 2100000, guid: 8d6e77928014474498fadda18ea707e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: walls_break
+    second: {fileID: 2100000, guid: aafc8d73b9596bc4da78ffad387eeaa5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: woodRoof
+    second: {fileID: 2100000, guid: 7d900caf57491144b9b6558f9d6fd45e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood_planks
+    second: {fileID: 2100000, guid: a5872755d0438d54a810d749596c8c42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: worked_Stone
+    second: {fileID: 2100000, guid: b299cdef5ef13cd44946b578b1e43d43, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: worked_Stone_2
+    second: {fileID: 2100000, guid: 11bd36b7379f76543aadf897d819ad4f, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 3
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.12
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    fileIdsGeneration: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 4
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.12
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 1
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

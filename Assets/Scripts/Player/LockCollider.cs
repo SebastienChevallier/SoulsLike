@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class LockCollider : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)        
-    {        
+    public static bool looking;
+
+    private void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.CompareTag("Player"))
-        {            
-            GameObject.Find("CamAnchor").GetComponent<JoystickCamera>().lockCible = transform.parent;            
+        {
+            GameObject.Find("CamAnchor").GetComponent<JoystickCamera>().lockCible = transform.parent;
+            looking = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            looking = false;
         }
     }
 }
