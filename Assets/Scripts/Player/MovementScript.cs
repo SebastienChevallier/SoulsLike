@@ -274,7 +274,7 @@ public class MovementScript : MonoBehaviour
     }
     #endregion
 
-    void CheckWeapon()
+    public void CheckWeapon()
     {
         foreach(GameObject obj in weapons)
         {
