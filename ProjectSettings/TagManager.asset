@@ -9,6 +9,7 @@ TagManager:
   - Sword
   - Spear
   - LongSword
+  - Damage
   layers:
   - Default
   - TransparentFX

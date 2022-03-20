@@ -265,10 +265,12 @@ public class MovementScript : MonoBehaviour
     public void IsRoll()
     {
         isRoll = true;
+        playerStats.isRolling = true;
     }
     public void IsntRoll()
     {
         isRoll = false;
+        playerStats.isRolling = false;
     }
     #endregion
 

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 480168434952621225}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellDuration: 5
   spellSpeed: 30
+  player: {fileID: 11400000, guid: 63215f68a5294ae4cbd53db227ee537f, type: 2}
   rb: {fileID: 480168434952621225}
 --- !u!54 &480168434952621225
 Rigidbody:

@@ -11,10 +11,12 @@ public class SO_Player : ScriptableObject
     public int maxStamina;
     public int stamina;
 
+    public bool isRolling;
+
     
     public void  TakeDamage(int damage)
     {
-        if (life > damage)
+        if (!isRolling)
         {
             life -= damage;            
         }                

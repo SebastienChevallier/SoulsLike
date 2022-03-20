@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   maxLife: 500
-  life: 500
+  life: 370
   maxStamina: 200
   stamina: 200
+  isRolling: 0
