@@ -79,8 +79,10 @@ public class MovementScript : MonoBehaviour
             rotationSpeed = 25;
         }
         RegenStamina();
+        
 
         Move();
+        
         rb.velocity += new Vector3(0, Physics.gravity.y * tauxGrav * Time.deltaTime, 0);
     }
 
