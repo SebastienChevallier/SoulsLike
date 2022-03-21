@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6772376960964995457}
   - component: {fileID: 6874688826373396789}
   - component: {fileID: 8010074679545530515}
-  - component: {fileID: 7718324466614004134}
   - component: {fileID: 6534684083187584212}
   m_Layer: 0
   m_Name: LOD_0
@@ -31,6 +30,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4696918893124759687}
   m_RootOrder: 0
@@ -107,20 +107,6 @@ MonoBehaviour:
   windQuality: 3
   localWindAmplitude: 0.32
   windMain: 1
---- !u!64 &7718324466614004134
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2868960127485273011}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43839059389596038}
 --- !u!65 &6534684083187584212
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -161,6 +147,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2253040625422143478}
   - {fileID: 2741730170073517329}
@@ -207,7 +194,6 @@ GameObject:
   - component: {fileID: 3836996189859888740}
   - component: {fileID: 6288887402568306361}
   - component: {fileID: 1208208930919553545}
-  - component: {fileID: 5877659886700325164}
   - component: {fileID: 81838315322709162}
   m_Layer: 0
   m_Name: LOD_1
@@ -226,6 +212,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4696918893124759687}
   m_RootOrder: 1
@@ -302,20 +289,6 @@ MonoBehaviour:
   windQuality: 3
   localWindAmplitude: 0.32
   windMain: 1
---- !u!64 &5877659886700325164
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4455812864711409743}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43215990493155270}
 --- !u!65 &81838315322709162
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -356,6 +329,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4696918893124759687}
   m_RootOrder: 2

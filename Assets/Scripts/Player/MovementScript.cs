@@ -90,7 +90,7 @@ public class MovementScript : MonoBehaviour
         animPerso.SetBool("isGrounded", isGrounded);
         SetDir();
         ControlSpeed();
-        jumpLogic();
+        //jumpLogic();
         Roll();
         Slash();
         Special();
@@ -99,7 +99,7 @@ public class MovementScript : MonoBehaviour
     {
         
         Vector3 mouveY = mainCamera.forward * Input.GetAxis("Vertical");
-        Vector3 mouveX = mainCamera.right * Input.GetAxis("Horizontal");        
+        Vector3 mouveX = mainCamera.right * Input.GetAxis("Horizontal");
         movDir = mouveX + mouveY;
         
         animPerso.SetFloat("Blend", movDir.magnitude);
@@ -135,7 +135,7 @@ public class MovementScript : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Fire1") && playerStats.stamina > costJump && !isRoll)
         {
             playerStats.UseStamina(costJump);
-            rb.AddForce(new Vector3(rb.velocity.x, jumpForce, rb.velocity.z), ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
             animPerso.Play("Jump");
             weapon.GetComponent<Weapon>().compteurCoup = 1;

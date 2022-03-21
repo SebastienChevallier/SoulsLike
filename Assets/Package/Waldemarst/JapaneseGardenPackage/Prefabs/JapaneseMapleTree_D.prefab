@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7281169230794544931}
   - {fileID: 6628308170872315588}
@@ -88,6 +89,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4307367728179572486}
   m_RootOrder: 2
@@ -146,7 +148,6 @@ GameObject:
   - component: {fileID: 872591212564453368}
   - component: {fileID: 1411056613796001739}
   - component: {fileID: 8796865282421757022}
-  - component: {fileID: 8118126554361450956}
   - component: {fileID: 8163615851247341650}
   m_Layer: 0
   m_Name: LOD_1
@@ -165,6 +166,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4307367728179572486}
   m_RootOrder: 1
@@ -241,20 +243,6 @@ MonoBehaviour:
   windQuality: 3
   localWindAmplitude: 0.32
   windMain: 1
---- !u!64 &8118126554361450956
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4440105754339406922}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43955835693807328}
 --- !u!65 &8163615851247341650
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -280,7 +268,6 @@ GameObject:
   - component: {fileID: 2550643565643233004}
   - component: {fileID: 2646956302753075520}
   - component: {fileID: 6914100505993326075}
-  - component: {fileID: 794482133099777256}
   - component: {fileID: 6186747233634411729}
   m_Layer: 0
   m_Name: LOD_0
@@ -299,6 +286,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4307367728179572486}
   m_RootOrder: 0
@@ -375,20 +363,6 @@ MonoBehaviour:
   windQuality: 3
   localWindAmplitude: 0.32
   windMain: 1
---- !u!64 &794482133099777256
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093115984850463245}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43168897757303332}
 --- !u!65 &6186747233634411729
 BoxCollider:
   m_ObjectHideFlags: 0
