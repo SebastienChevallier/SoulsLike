@@ -132,7 +132,7 @@ public class MovementScript : MonoBehaviour
 
     void jumpLogic()
     {        
-        if (isGrounded && Input.GetButtonDown("Fire1") && playerStats.stamina > costJump)
+        if (isGrounded && Input.GetButtonDown("Fire1") && playerStats.stamina > costJump && !isRoll)
         {
             playerStats.UseStamina(costJump);
             rb.AddForce(new Vector3(rb.velocity.x, jumpForce, rb.velocity.z), ForceMode.Impulse);

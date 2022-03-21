@@ -38,6 +38,7 @@ public class SpellMovement : MonoBehaviour
             if (!player.isRolling)
             {
                 Destroy(transform.gameObject);
+                other.GetComponent<Animator>().Play("Hit");
             }
             
         }
