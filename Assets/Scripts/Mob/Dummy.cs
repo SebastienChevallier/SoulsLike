@@ -27,7 +27,8 @@ public class Dummy : MonoBehaviour
         transform.GetChild(0).GetComponent<TextMeshPro>().text = so_Dummy.life.ToString();
         if (LockCollider.looking)
         {
-            transform.LookAt(player, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, player.rotation, Time.deltaTime);
+            //transform.LookAt(player, Vector3.up);
             Fireball();
         }
     }

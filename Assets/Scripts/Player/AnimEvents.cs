@@ -11,50 +11,50 @@ public class AnimEvents : MonoBehaviour
         player = transform.parent.GetComponent<MovementScript>();
     }
 
-    void CanMove()
+    public void CanMove()
     {
-        player.CanMove();
+        player.canMove = true;
     }
 
-    void CantMove()
+    public void CantMove()
     {
-        player.CantMove();
+        player.canMove = false;
     }
 
     public void CantRotate()
     {
-        player.CantRotate();
+        player.canRotate = false;
     }
     public void CanRotate()
     {
-        player.CanRotate();
+        player.canRotate = true;
     }
 
     public void Invincible()
     {
-        player.Invincible();
+        player.isInvincible = true;
     }
     public void vincible()
     {
-        player.vincible();
+        player.isInvincible = false;
     }
 
     public void CantAttack()
     {
-        player.CantAttack();
+        player.canAttack = false;
     }
     public void CanAttack()
     {
-        player.CanAttack();
+        player.canAttack = true;
     }
 
     public void IsRoll()
     {
-        player.IsRoll();
+        player.isRoll = true;
     }
 
     public void IsntRoll()
     {
-        player.IsntRoll();
+        player.isRoll = false;
     }
 }

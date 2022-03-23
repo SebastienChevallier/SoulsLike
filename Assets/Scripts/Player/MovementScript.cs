@@ -54,6 +54,8 @@ public class MovementScript : MonoBehaviour
     private float coolDownStart = 0f;
     private float regenCooldown = 0.1f; // 2 = two seconds 
 
+   
+
 
     private Quaternion target;
 
@@ -78,11 +80,8 @@ public class MovementScript : MonoBehaviour
         {
             rotationSpeed = 25;
         }
-        RegenStamina();
-        
-
+        RegenStamina(); 
         Move();
-        
         rb.velocity += new Vector3(0, Physics.gravity.y * tauxGrav * Time.deltaTime, 0);
     }
 
@@ -92,6 +91,7 @@ public class MovementScript : MonoBehaviour
         animPerso.SetBool("isGrounded", isGrounded);
         SetDir();
         ControlSpeed();
+        
         //jumpLogic();
         Roll();
         Slash();
@@ -155,7 +155,7 @@ public class MovementScript : MonoBehaviour
             weapon.GetComponent<Weapon>().compteurCoup = 1;
         }
 
-        currentTime += Time.deltaTime;
+        currentTime += Time.fixedDeltaTime;
         float percent = currentTime / delayToMove;
 
         if (isRoll)
@@ -174,10 +174,14 @@ public class MovementScript : MonoBehaviour
             coolDownStart = Time.time;
         }
     }
-    
-    void Slash()
-    {       
 
+    
+
+   
+
+    void Slash()
+    {
+        
         if (Input.GetButtonDown("Fire2") && canAttack && !isRoll && canMove && playerStats.stamina > costSlash)
         {
             playerStats.UseStamina(costSlash);
@@ -192,13 +196,16 @@ public class MovementScript : MonoBehaviour
 
             if(compteurCombo == 1)
             {
+                animPerso.SetInteger("ComboCount", compteurCombo);
                 animPerso.Play("Slash1");
             }else if(compteurCombo == 2)
             {
+                animPerso.SetInteger("ComboCount", compteurCombo);
                 animPerso.Play("Slash2");
             }
             else
             {
+                animPerso.SetInteger("ComboCount", compteurCombo);
                 animPerso.Play("Slash3");
                 compteurCombo = 0;
             }      
@@ -212,70 +219,9 @@ public class MovementScript : MonoBehaviour
             playerStats.UseStamina(costSpecial);
             animPerso.Play("Special");
             currentTime = 0;
-        }
-        /*
-        currentTime += Time.deltaTime;
-        float percent = currentTime / 1f;
-
-        if (!canMove)
-        {
-            //curve.Evaluate(percent)
-            transform.position = Vector3.Lerp(transform.GetChild(0).position, transform.GetChild(0).position + transform.GetChild(0).forward * dashForce, dashCurve.Evaluate(percent));
-        }*/
+        }        
     }
-
-    #region accesseurs
-    public void CanMove()
-    {
-        canMove = true;        
-    }
-    public void CantMove()
-    {       
-        canMove = false;      
-    }
-
-    public void CantRotate()
-    {
-        canRotate = false;
-        
-    }
-    public void CanRotate()
-    {
-        canRotate = true;
-    }
-
-    public void Invincible()
-    {
-        isInvincible = true;
-    }
-    public void vincible()
-    {
-        isInvincible = false;
-    }
-
-    
-    public void CanAttack()
-    {
-        canAttack = true;                      
-        weapon.GetComponent<Weapon>().compteurCoup = 0;        
-    }
-    public void CantAttack()
-    {
-        canAttack = false;
-    }
-
-    public void IsRoll()
-    {
-        isRoll = true;
-        playerStats.isRolling = true;
-    }
-    public void IsntRoll()
-    {
-        isRoll = false;
-        playerStats.isRolling = false;
-    }
-    #endregion
-
+  
     public void CheckWeapon()
     {
         foreach(GameObject obj in weapons)

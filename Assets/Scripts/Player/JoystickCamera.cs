@@ -28,9 +28,7 @@ public class JoystickCamera : MonoBehaviour
     private void FixedUpdate()
     {
         CameraRotation();
-        CameraColision();
-        
-
+        CameraColision();  
     }
 
     private void Update()
@@ -40,7 +38,7 @@ public class JoystickCamera : MonoBehaviour
 
     void CameraRotation()
     {
-        if (Input.GetAxis("JoystickHorizontal") > 0.01f || Input.GetAxis("JoystickVertical") > 0.01f || Input.GetAxis("JoystickHorizontal") < -0.01f || Input.GetAxis("JoystickVertical") < -0.01f)
+        if (Input.GetAxis("JoystickHorizontal") > 0.1f || Input.GetAxis("JoystickVertical") > 0.1f || Input.GetAxis("JoystickHorizontal") < -0.1f || Input.GetAxis("JoystickVertical") < -0.1f)
         {
             transform.Rotate(Vector3.up, Input.GetAxis("JoystickHorizontal") * sensitivityX * Time.deltaTime);
             xRotation += Input.GetAxis("JoystickVertical");
@@ -54,7 +52,7 @@ public class JoystickCamera : MonoBehaviour
 
     void CameraLock()
     {
-        if (Input.GetButtonDown("Lock"))
+        if (Input.GetButtonDown("Lock") && lockCible != null)
         {
             if (islocked)
             {
@@ -67,8 +65,7 @@ public class JoystickCamera : MonoBehaviour
         }else if(islocked)
         {           
             transform.LookAt(lockCible.position);
-        }
-        
+        }        
     }
 
     void CameraColision()
