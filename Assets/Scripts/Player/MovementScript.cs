@@ -153,7 +153,7 @@ public class MovementScript : MonoBehaviour
             weapon.GetComponent<Weapon>().compteurCoup = 1;
         }
 
-        currentTime += Time.deltaTime;
+        currentTime += Time.fixedDeltaTime;
         float percent = currentTime / delayToMove;
 
         if (isRoll)
