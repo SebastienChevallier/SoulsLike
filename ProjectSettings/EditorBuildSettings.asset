@@ -6,7 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SceneManager.unity
+    path: Assets/Scenes/SceneManagment.unity
+    guid: cb0c110755cd9894e9acc21b985a952c
+  - enabled: 1
+    path: Assets/Scenes/SceneMenu.unity
+    guid: c5ab2b3b6bcf8494db39fc8addc019d2
+  - enabled: 1
+    path: Assets/Scenes/SceneLoadAsync.unity
     guid: 7fc29d540d3d88241b12076b5f9a96f3
   - enabled: 1
     path: Assets/Scenes/Seb.unity
@@ -14,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene_UI.unity
     guid: aea73ee4ae48b6e4baaad28568e50022
+  - enabled: 1
+    path: Assets/Scenes/SceneMort.unity
+    guid: 0cddacc575913b946a24d6bc0ca19355
+  - enabled: 1
+    path: Assets/Scenes/SceneMenu_InGame.unity
+    guid: 02cba11d54cceae408cd0a4adc5cbd06
   m_configObjects: {}

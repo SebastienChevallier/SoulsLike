@@ -21,6 +21,7 @@ public class JoystickCamera : MonoBehaviour
     public LayerMask maskCam;
     public float lerpTime = 5f;
     public AnimationCurve curve;
+    public SO_Player _Player;
 
     public bool islocked;
 
@@ -57,10 +58,12 @@ public class JoystickCamera : MonoBehaviour
             if (islocked)
             {
                 islocked = false;
+                _Player.isLock = false;
             }
             else
             {
                 islocked = true;
+                _Player.isLock = true;
             }
         }else if(islocked)
         {           

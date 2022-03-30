@@ -9,6 +9,8 @@ public class UI_Manager : MonoBehaviour
     public Slider sliderStamina;
     public SO_Player _Player;
 
+    public GameObject panelLock;
+
     // Update is called once per frame
     private void Start()
     {
@@ -19,5 +21,13 @@ public class UI_Manager : MonoBehaviour
     {
         sliderLife.value = _Player.life;
         sliderStamina.value = _Player.stamina;
+        if (_Player.isLock)
+        {
+            panelLock.SetActive(true);
+        }
+        else
+        {
+            panelLock.SetActive(false);
+        }
     }
 }

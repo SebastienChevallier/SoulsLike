@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovementScript : MonoBehaviour
 {
@@ -53,10 +54,6 @@ public class MovementScript : MonoBehaviour
     private float currentTime = 0;
     private float coolDownStart = 0f;
     private float regenCooldown = 0.1f; // 2 = two seconds 
-
-   
-
-
     private Quaternion target;
 
     private void Awake()
@@ -89,10 +86,9 @@ public class MovementScript : MonoBehaviour
     {
         isGrounded = Physics.Raycast(transform.position, -transform.up, 0.15f);
         animPerso.SetBool("isGrounded", isGrounded);
+        Death();
         SetDir();
-        ControlSpeed();
-        
-        //jumpLogic();
+        ControlSpeed();        
         Roll();
         Slash();
         Special();
@@ -152,7 +148,6 @@ public class MovementScript : MonoBehaviour
             isRoll = true;
             animPerso.Play("Roll");
             currentTime = 0;
-            weapon.GetComponent<Weapon>().compteurCoup = 1;
         }
 
         currentTime += Time.fixedDeltaTime;
@@ -160,8 +155,7 @@ public class MovementScript : MonoBehaviour
 
         if (isRoll)
         {
-            rb.AddForce((transform.GetChild(0).forward * rollForce) * curve.Evaluate(percent), ForceMode.Force);
-            //transform.position = Vector3.Lerp(transform.GetChild(0).position, transform.GetChild(0).position + transform.GetChild(0).forward * rollForce, curve.Evaluate(percent));
+            rb.AddForce((transform.GetChild(0).forward * rollForce) * curve.Evaluate(percent), ForceMode.Force);          
         }
     }    
         
@@ -173,11 +167,7 @@ public class MovementScript : MonoBehaviour
             playerStats.GainStamina();
             coolDownStart = Time.time;
         }
-    }
-
-    
-
-   
+    } 
 
     void Slash()
     {
@@ -219,8 +209,18 @@ public class MovementScript : MonoBehaviour
             playerStats.UseStamina(costSpecial);
             animPerso.Play("Special");
             currentTime = 0;
-        }        
+        }
+
+        currentTime += Time.fixedDeltaTime;
+        float percent = currentTime / delayToMove;
+
+        if (animPerso.GetCurrentAnimatorStateInfo(0).IsName("Special") && weaponType == "Sword")
+        {
+            rb.AddForce((transform.GetChild(0).forward * dashForce) * dashCurve.Evaluate(animPerso.GetCurrentAnimatorStateInfo(0).normalizedTime), ForceMode.Force);
+        }
     }
+
+   
   
     public void CheckWeapon()
     {
@@ -239,7 +239,19 @@ public class MovementScript : MonoBehaviour
         }
     }
 
-
+    public void Death()
+    {
+        if(playerStats.life <= 0)
+        {
+            animPerso.Play("Death");
+            if (!playerStats.isDeath)
+            {
+                SceneManager.LoadScene("SceneMort", LoadSceneMode.Additive);
+                playerStats.isDeath = true;
+            }
+        }
+        
+    }
 
 
 }
