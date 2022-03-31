@@ -5,18 +5,25 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     public float chargeCD = 15f;
-    public float attackCD = 3f;
+    public float attackCD = 2f;
 
     private float currentChargeTime = 0;
     private float currentAttackTime = 0;
+    private bool once = false;
+
 
     Transform player;
     Animator animator;
+    Camera camera;
+    Camera mainCamera;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
         animator = GetComponent<Animator>();
+        camera = GetComponentInChildren<Camera>();
+        camera.gameObject.SetActive(false);
+        mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>(); ;
     }
 
     public void Update()
@@ -62,6 +69,29 @@ public class Boss : MonoBehaviour
         {
             animator.SetBool("hasAttacked", false);
             currentAttackTime = 0;
+        }
+    }
+
+    public IEnumerator Cinematic()
+    {
+        GameObject.Find("CinematicPanel").GetComponent<Animator>().Play("Cinematic");
+        yield return new WaitForSeconds(.5f);
+        camera.gameObject.SetActive(true);
+        mainCamera.gameObject.SetActive(false);
+        animator.Play("Landing");
+        yield return new WaitForSeconds(4.7f);
+        GameObject.Find("CinematicPanel").GetComponent<Animator>().Play("Cinematic");
+        yield return new WaitForSeconds(.5f);
+        mainCamera.gameObject.SetActive(true);
+        camera.gameObject.SetActive(false);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && !once)
+        {
+            StartCoroutine(Cinematic());
+            once = true;
         }
     }
 }

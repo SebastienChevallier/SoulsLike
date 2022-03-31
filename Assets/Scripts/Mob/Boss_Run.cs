@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Boss_Run : StateMachineBehaviour
 {
+    public SO_Ennemis minotaur;
+
     public float wanderRadius;
     public float wanderTimer;
     private float timer;
@@ -12,6 +14,12 @@ public class Boss_Run : StateMachineBehaviour
     public float chargeRange;
     public float attack1Range;
     public float attack2Range;
+
+    private float currentTime;
+    private int currentHP;
+    
+    private int damageTaken;
+    private bool phase2 = false;
 
     Transform player;
     NavMeshAgent agent;
@@ -31,6 +39,8 @@ public class Boss_Run : StateMachineBehaviour
     {
         Follow_Player();
         Skills(animator);
+        Phases(animator);
+        CheckBurst(animator);
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -38,6 +48,8 @@ public class Boss_Run : StateMachineBehaviour
         animator.ResetTrigger("Charge");
         animator.ResetTrigger("Attack1");
         animator.ResetTrigger("Attack2");
+        animator.ResetTrigger("ComboAttack");
+        animator.ResetTrigger("360");
         agent.ResetPath();
     }
 
@@ -55,7 +67,10 @@ public class Boss_Run : StateMachineBehaviour
         {
             if (rand <= 0.5f && animator && !animator.GetBool("hasAttacked"))
             {
-                animator.SetTrigger("Attack2");
+                if (!phase2)
+                    animator.SetTrigger("Attack2");
+                else
+                    animator.SetTrigger("360");
             }
             else if (rand > 0.5f && animator && !animator.GetBool("hasAttacked"))
             {
@@ -74,30 +89,39 @@ public class Boss_Run : StateMachineBehaviour
             animator.SetBool("Charging", true);
         }
     }
-
-
-    public Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+ 
+    public void Phases(Animator animator)
     {
-        Vector3 randDirection = Random.insideUnitSphere * dist;
-
-        randDirection += origin;
-
-        UnityEngine.AI.NavMeshHit navHit;
-
-        UnityEngine.AI.NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
-
-        return navHit.position;
+        if (minotaur.life <= 0)
+        {
+            animator.SetTrigger("Death");
+            agent.speed = 0;
+        }
+        else if (minotaur.life <= (minotaur.maxLife / 2))
+        {
+            animator.SetTrigger("Taunt");
+            phase2 = true;
+            agent.speed *= 2;
+        }
     }
 
-    public void Random_Walk()
+    private void CheckBurst(Animator animator)
     {
-        timer += Time.deltaTime;
+        currentTime += Time.fixedDeltaTime;
+        damageTaken = currentHP - minotaur.life;
 
-        if (timer >= wanderTimer)
+        if (damageTaken >= (minotaur.maxLife / 10))
         {
-            Vector3 newPos = RandomNavSphere(agent.transform.position, wanderRadius, -1);
-            agent.SetDestination(newPos);
-            timer = 0;
+            animator.SetTrigger("Hit");
+            damageTaken = 0;
+            currentHP = minotaur.life;
+            currentTime = 0;
+        }
+        else if (currentTime >= 3)
+        {
+            damageTaken = 0;
+            currentHP = minotaur.life;
+            currentTime = 0;
         }
     }
 }
