@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     public int damage;
     private GameObject _player;
     public GameObject fx_Blood;
+    public SO_Player sO_Player;
 
     private CamShake camShakeComp;
     
@@ -21,19 +22,16 @@ public class Weapon : MonoBehaviour
         camShakeComp = _player.transform.GetChild(1).GetComponent<CamShake>();
     }
 
-    public int compteurCoup = 0;
-    private void OnTriggerStay(Collider other)
+    
+    private void OnTriggerEnter(Collider other)
     {        
-        if (!_player.GetComponent<MovementScript>().canAttack && _player.GetComponent<MovementScript>().isGrounded && compteurCoup < 1)
-        {
-            
+        if (!_player.GetComponent<MovementScript>().canAttack && _player.GetComponent<MovementScript>().isGrounded && !_player.GetComponent<MovementScript>().isRoll && !_player.GetComponent<MovementScript>().isHit)
+        {                        
             if (other.CompareTag("Mob"))
-            {
-                
+            {                
                 other.GetComponent<Dummy>().so_Dummy.TakeDamage(damage);
                 Instantiate(fx_Blood, other.ClosestPoint(transform.position), Quaternion.identity);
-                camShakeComp.shakeDuration = 0.1f;
-                compteurCoup = 1;
+                camShakeComp.shakeDuration = 0.1f;                
             }
         }
         

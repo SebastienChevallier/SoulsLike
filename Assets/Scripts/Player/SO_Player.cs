@@ -14,12 +14,14 @@ public class SO_Player : ScriptableObject
 
     public bool isRolling;
     public bool isLock;
-    public bool isDeath = false;
+    public bool isDeath = false;   
 
-    
-
-
-
+    public void ResetValue()
+    {
+        life = maxLife;
+        stamina = maxStamina;
+        isDeath = false;
+    }
     public void  TakeDamage(int damage)
     {
         if (!isRolling)

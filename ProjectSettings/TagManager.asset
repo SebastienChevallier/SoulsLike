@@ -10,6 +10,7 @@ TagManager:
   - Spear
   - LongSword
   - Damage
+  - Water
   layers:
   - Default
   - TransparentFX

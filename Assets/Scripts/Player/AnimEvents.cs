@@ -57,4 +57,19 @@ public class AnimEvents : MonoBehaviour
     {
         player.isRoll = false;
     }
+
+    public void IsHit()
+    {
+        player.isHit = true;
+    }
+
+    public void IsntHit()
+    {
+        player.isHit = false;
+    }
+
+    public void Step()
+    {
+        player.Step();
+    }
 }

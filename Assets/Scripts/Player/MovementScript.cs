@@ -28,6 +28,7 @@ public class MovementScript : MonoBehaviour
     public bool isRoll = false;
     public bool isGrounded = false;
     public bool canAttack;
+    public bool isHit = false;
 
     [Header("Roll Settings")]
     public AnimationCurve curve;
@@ -128,18 +129,7 @@ public class MovementScript : MonoBehaviour
             
     }
 
-    void jumpLogic()
-    {        
-        if (isGrounded && Input.GetButtonDown("Fire1") && playerStats.stamina > costJump && !isRoll)
-        {
-            playerStats.UseStamina(costJump);
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
-            animPerso.Play("Jump");
-            weapon.GetComponent<Weapon>().compteurCoup = 1;
-        }
-    }     
-
+    
     void Roll()
     {       
         if (Input.GetButtonDown("Jump") && canMove && !isRoll && playerStats.stamina > costRoll)
@@ -174,6 +164,10 @@ public class MovementScript : MonoBehaviour
         
         if (Input.GetButtonDown("Fire2") && canAttack && !isRoll && canMove && playerStats.stamina > costSlash)
         {
+            if (playerStats.isLock)
+            {
+                transform.GetChild(0).LookAt(GameObject.Find("CamAnchor").GetComponent<JoystickCamera>().lockCible, Vector3.up);
+            }
             playerStats.UseStamina(costSlash);
 
             if (delayTime < Time.time)
@@ -186,16 +180,16 @@ public class MovementScript : MonoBehaviour
 
             if(compteurCombo == 1)
             {
-                animPerso.SetInteger("ComboCount", compteurCombo);
+                
                 animPerso.Play("Slash1");
             }else if(compteurCombo == 2)
             {
-                animPerso.SetInteger("ComboCount", compteurCombo);
+                
                 animPerso.Play("Slash2");
             }
             else
             {
-                animPerso.SetInteger("ComboCount", compteurCombo);
+                
                 animPerso.Play("Slash3");
                 compteurCombo = 0;
             }      
@@ -206,6 +200,10 @@ public class MovementScript : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire3") && canAttack && !isRoll && canMove && playerStats.stamina > costSpecial)
         {
+            if (playerStats.isLock)
+            {
+                transform.GetChild(0).LookAt(GameObject.Find("CamAnchor").GetComponent<JoystickCamera>().lockCible, Vector3.up);
+            }
             playerStats.UseStamina(costSpecial);
             animPerso.Play("Special");
             currentTime = 0;
@@ -241,15 +239,36 @@ public class MovementScript : MonoBehaviour
 
     public void Death()
     {
-        if(playerStats.life <= 0)
+        
+        if (playerStats.life <= 0)
         {
             animPerso.Play("Death");
             if (!playerStats.isDeath)
             {
                 SceneManager.LoadScene("SceneMort", LoadSceneMode.Additive);
                 playerStats.isDeath = true;
+                playerStats.ResetValue();
             }
         }
+        
+    }
+
+    public GameObject fX_Step;
+    public GameObject fX_WaterStep;
+    public LayerMask layerWater;
+    public void Step()
+    {      
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.7f, 0), -transform.up, 1f, layerWater))
+        {
+            GameObject objet = Instantiate(fX_WaterStep, transform.position, Quaternion.identity);
+            Destroy(objet, 1);
+        }
+        else
+        {
+            GameObject objet = Instantiate(fX_Step, transform.position, Quaternion.identity);
+            Destroy(objet, 1);
+        }
+
         
     }
 

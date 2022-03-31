@@ -31,7 +31,7 @@ public class _SceneLoadAsync : MonoBehaviour
         {
             float pct = Mathf.Clamp01(operation.progress / .9f);
             slider.value = pct;
-            print(pct);
+            
             yield return null;
         }
         loadingScreen.SetActive(false);

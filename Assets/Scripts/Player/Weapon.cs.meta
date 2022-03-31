@@ -5,6 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - fx_Blood: {fileID: 5771277315375789006, guid: e4121be57227ef64b96a1c14eccef30b, type: 3}
+  - sO_Player: {fileID: 11400000, guid: 63215f68a5294ae4cbd53db227ee537f, type: 2}
   - animatorController: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}

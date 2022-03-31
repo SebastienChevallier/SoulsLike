@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class SceneLoadManager : MonoBehaviour
 {
     private bool menuOn = false;
+    public SO_Player _PlayerStats;
     // Start is called before the first frame update
     void Start()
     {
         SceneManager.LoadScene("SceneMenu", LoadSceneMode.Additive);
+        _PlayerStats.ResetValue();
     }
     private void Update()
     {
@@ -17,15 +19,19 @@ public class SceneLoadManager : MonoBehaviour
     }
     void MenuIG()
     {
-        if (Input.GetButtonDown("Start") && !menuOn && SceneManager.GetSceneByName("Seb").isLoaded)
+        if (Input.GetButtonDown("Start")  && SceneManager.GetSceneByName("Seb").isLoaded)
         {
-            SceneManager.LoadScene("SceneMenu_InGame", LoadSceneMode.Additive);
-            menuOn = true;
-        }
-        else if(Input.GetButtonDown("Start") && menuOn && SceneManager.GetSceneByName("Seb").isLoaded)
-        {
-            SceneManager.UnloadSceneAsync("SceneMenu_InGame");
-            menuOn = false;
-        }
+            if (!menuOn)
+            {
+                SceneManager.LoadScene("SceneMenu_InGame", LoadSceneMode.Additive);
+                menuOn = true;
+            }
+            else
+            {
+                menuOn = false;
+                SceneManager.UnloadSceneAsync("SceneMenu_InGame");
+                
+            }            
+        } 
     }
 }
