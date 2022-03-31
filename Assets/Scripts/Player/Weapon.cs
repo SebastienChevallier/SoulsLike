@@ -6,6 +6,7 @@ using UnityEngine.Animations;
 public class Weapon : MonoBehaviour
 {
     public int damage;
+    public int compteurCoup = 0;
     private GameObject _player;
     public GameObject fx_Blood;
 
@@ -21,7 +22,6 @@ public class Weapon : MonoBehaviour
         camShakeComp = _player.transform.GetChild(1).GetComponent<CamShake>();
     }
 
-    public int compteurCoup = 0;
     private void OnTriggerStay(Collider other)
     {        
         if (!_player.GetComponent<MovementScript>().canAttack && _player.GetComponent<MovementScript>().isGrounded && compteurCoup < 1)
