@@ -20,6 +20,7 @@ public class Boss_Run : StateMachineBehaviour
     
     private int damageTaken;
     private bool phase2 = false;
+    private bool taunt = false;
 
     Transform player;
     NavMeshAgent agent;
@@ -97,10 +98,11 @@ public class Boss_Run : StateMachineBehaviour
             animator.SetTrigger("Death");
             agent.speed = 0;
         }
-        else if (minotaur.life <= (minotaur.maxLife / 2))
+        else if (minotaur.life <= (minotaur.maxLife / 2) && !taunt)
         {
             animator.SetTrigger("Taunt");
             phase2 = true;
+            taunt = true;
             agent.speed *= 2;
         }
     }

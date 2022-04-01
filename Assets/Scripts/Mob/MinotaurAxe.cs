@@ -13,25 +13,35 @@ public class MinotaurAxe : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && minotaur.isAttck)
         {
             if (minotaur.life <= (minotaur.maxLife / 2))
             {
-                if (!player.isRolling)
+                if (!player.isRolling && !player.isDeath)
                 {
                     player.TakeDamage(damagePhase2);
+                    other.gameObject.GetComponent<Animator>().Play("Hit");
+                    if (player.isDeath)
+                    {
+                        minotaur.resetValue();
+                    }
                 }
                 
             }
             else
             {
-                if (!player.isRolling)
+                if (!player.isRolling && !player.isDeath)
                 {
                     player.TakeDamage(damage);
+                    other.gameObject.GetComponent<Animator>().Play("Hit");
+                    if (player.isDeath)
+                    {
+                        minotaur.resetValue();
+                    }
                 }
             }                
-            other.gameObject.GetComponent<Animator>().Play("Hit");
-            Debug.Log("J'ai pris des dégats");
+            
+            
         }
     }
 }

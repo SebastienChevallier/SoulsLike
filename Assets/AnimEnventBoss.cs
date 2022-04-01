@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class AnimEnventBoss : MonoBehaviour
 {
-    private 
-    private void Start()
-    {
-        
-    }
+    public SO_Ennemis boss; 
+    
     public void isAttack()
     {
-
+        boss.isAttck = true;
+    }
+    public void isntAttack()
+    {
+        boss.isAttck = false;
     }
 
 }

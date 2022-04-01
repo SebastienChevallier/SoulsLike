@@ -6,6 +6,8 @@ public class Boss : MonoBehaviour
 {
     public float chargeCD = 15f;
     public float attackCD = 2f;
+    public float ramRotate = 15f;
+    public float runRotate = 3f;
 
     private float currentChargeTime = 0;
     private float currentAttackTime = 0;
@@ -45,14 +47,14 @@ public class Boss : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("RamStart"))
         {
-            Rotate_Towards_Player(12f);
+            Rotate_Towards_Player(ramRotate);
             yield return new WaitForSeconds(.2f);
             animator.SetBool("Charging", false);
             animator.SetBool("hasCharged", true);
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
         {
-            Rotate_Towards_Player(.3f);
+            Rotate_Towards_Player(runRotate);
             yield return null;
         }
     }

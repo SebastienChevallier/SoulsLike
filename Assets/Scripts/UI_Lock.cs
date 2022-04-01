@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Lock : MonoBehaviour
 {
@@ -9,16 +10,15 @@ public class UI_Lock : MonoBehaviour
 
     public GameObject lockImage;
     public GameObject lifeMob;
+
     // Update is called once per frame
     void Update()
     {
-        if (_Player.isLock)
-        {
-            lockImage.SetActive(true);
-        }
-        else if(!_Player.isLock)
-        {
-            lockImage.SetActive(false);
-        }
+        UpdateSlider();
+    }
+
+    public void UpdateSlider()
+    {
+        lifeMob.GetComponent<Slider>().value = _Mob.life / _Mob.maxLife;
     }
 }

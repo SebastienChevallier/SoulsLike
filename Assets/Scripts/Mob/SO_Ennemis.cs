@@ -11,12 +11,14 @@ public class SO_Ennemis : ScriptableObject
     public int life;
     public bool isAttck;
 
+    public void resetValue()
+    {
+        life = maxLife;
+    }
+
 
     public void TakeDamage(int damage)
-    {
-        if (life > damage)
-        {
-            life -= damage;
-        }
+    {        
+        life -= damage;        
     }
 }
