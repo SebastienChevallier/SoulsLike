@@ -152,8 +152,12 @@ public class MovementScript : MonoBehaviour
         
     void Heal()
     {
-        if(Input.GetButtonDown("Heal") && canMove && !isRoll && !(playerStats.nbHeal<=0))
+        if (Input.GetButtonDown("Heal") && canMove && !isRoll && (playerStats.nbHeal > 0))
         {
+            for (int i = 0; i < 3; i++)
+            {
+                transform.GetChild(2).GetChild(i).gameObject.GetComponent<ParticleSystem>().Play();
+            }
             playerStats.Heal(400);
         }
     }
