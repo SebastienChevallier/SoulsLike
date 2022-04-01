@@ -93,6 +93,7 @@ public class MovementScript : MonoBehaviour
         Roll();
         Slash();
         Special();
+        Heal();
     }
     private void SetDir()
     {
@@ -128,7 +129,6 @@ public class MovementScript : MonoBehaviour
         }
             
     }
-
     
     void Roll()
     {       
@@ -137,6 +137,7 @@ public class MovementScript : MonoBehaviour
             playerStats.UseStamina(costRoll);
             isRoll = true;
             animPerso.Play("Roll");
+            GetComponent<AudioSource>().PlayOneShot(playerStats.RollAudio);
             currentTime = 0;
         }
 
@@ -149,7 +150,13 @@ public class MovementScript : MonoBehaviour
         }
     }    
         
-
+    void Heal()
+    {
+        if(Input.GetButtonDown("Heal") && canMove && !isRoll && !(playerStats.nbHeal<=0))
+        {
+            playerStats.Heal(400);
+        }
+    }
     void RegenStamina()
     {
         if (Time.time > coolDownStart + regenCooldown && canMove && !isRoll && canAttack)
@@ -252,24 +259,43 @@ public class MovementScript : MonoBehaviour
         }
         
     }
-
+    [Header("FX")]
     public GameObject fX_Step;
+    public GameObject fX_SlashSpe;
     public GameObject fX_WaterStep;
     public LayerMask layerWater;
+
+    [Header("Audio")]
+    public AudioClip waterWalk;
+
     public void Step()
     {      
         if (Physics.Raycast(transform.position + new Vector3(0, 0.7f, 0), -transform.up, 1f, layerWater))
         {
+            GetComponent<AudioSource>().PlayOneShot(playerStats.WaterStepAudio);
             GameObject objet = Instantiate(fX_WaterStep, transform.position, Quaternion.identity);
+            
             Destroy(objet, 1);
         }
         else
         {
+            GetComponent<AudioSource>().PlayOneShot(playerStats.StepAudio);
             GameObject objet = Instantiate(fX_Step, transform.position, Quaternion.identity);
             Destroy(objet, 1);
         }
 
         
+    }
+
+    public void SlashFX(bool val)
+    {
+        weapon.transform.GetChild(0).gameObject.SetActive(val);
+    }
+
+    public void SpawnSlashSpe()
+    {
+        GameObject objet = Instantiate(fX_SlashSpe, transform.position + new Vector3(0, 1f, 0), transform.GetChild(0).rotation);
+        Destroy(objet, 1);
     }
 
 

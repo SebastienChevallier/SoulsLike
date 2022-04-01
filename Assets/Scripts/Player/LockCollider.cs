@@ -10,7 +10,7 @@ public class LockCollider : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameObject.Find("CamAnchor").GetComponent<JoystickCamera>().lockCible = transform.parent;
+            GameObject.Find("CamAnchor").GetComponent<JoystickCamera>().lockCible = transform;
             looking = true;
         }
     }

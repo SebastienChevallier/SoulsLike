@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimEvents : MonoBehaviour
 {
     private MovementScript player;
+    public SO_Player sO_Player;
 
     private void Start()
     {
@@ -51,11 +52,13 @@ public class AnimEvents : MonoBehaviour
     public void IsRoll()
     {
         player.isRoll = true;
+        sO_Player.isRolling = true;
     }
 
     public void IsntRoll()
     {
         player.isRoll = false;
+        sO_Player.isRolling = false;
     }
 
     public void IsHit()
@@ -71,5 +74,19 @@ public class AnimEvents : MonoBehaviour
     public void Step()
     {
         player.Step();
+    }
+
+    public void FxOn()
+    {
+        player.SlashFX(true);
+    }
+    public void FxOff()
+    {
+        player.SlashFX(false);
+    }
+
+    public void SpawnSlash()
+    {
+        player.SpawnSlashSpe();
     }
 }

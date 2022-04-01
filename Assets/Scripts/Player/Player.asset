@@ -13,9 +13,15 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   maxLife: 500
-  life: 30
+  life: 250
   maxStamina: 200
-  stamina: 200
+  stamina: 190
+  nbHeal: 0
   isRolling: 0
-  isLock: 0
+  isLock: 1
   isDeath: 0
+  HitAudio: {fileID: 8300000, guid: 28ea2fc591d6454419697a105af2bc45, type: 3}
+  RollAudio: {fileID: 8300000, guid: a9685cda8036dfd42bc7575a55482300, type: 3}
+  WaterStepAudio: {fileID: 8300000, guid: eefc7b60ed3a5b74a8a7a99b57980aa2, type: 3}
+  StepAudio: {fileID: 8300000, guid: 245ae7d30bccc634d869bb7782f93e7e, type: 3}
+  SpecialAudio: {fileID: 8300000, guid: a9685cda8036dfd42bc7575a55482300, type: 3}

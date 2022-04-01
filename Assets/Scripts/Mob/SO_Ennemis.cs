@@ -9,6 +9,7 @@ public class SO_Ennemis : ScriptableObject
     public string _name;
     public int maxLife;
     public int life;
+    public bool isAttck;
 
 
     public void TakeDamage(int damage)

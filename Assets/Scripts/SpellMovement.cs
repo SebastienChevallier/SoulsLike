@@ -33,10 +33,10 @@ public class SpellMovement : MonoBehaviour
     {        
         if (other.CompareTag("Player"))
         {
-            camShakeComp.shakeDuration = 0.1f;
-            player.TakeDamage(10);
             if (!player.isRolling)
             {
+                camShakeComp.shakeDuration = 0.1f;
+                player.TakeDamage(10);
                 Destroy(transform.gameObject);
                 other.GetComponent<Animator>().Play("Hit");
             }
